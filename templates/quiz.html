@@ -1,0 +1,458 @@
+{% load static %}
+{% static 'images' as baseurls %}
+
+
+<!DOCTYPE HTML>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="apple-mobile-web-app-title" content="CodePen">
+<link rel="shortcut icon" type="image/x-icon" href="{% static 'images/icons/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico' %}">
+<link rel="mask-icon" type="" href="{% static 'images/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg' %}" color="#111">
+<title> Quiz</title>
+<link rel="stylesheet" href="{% static 'css/normalize.min.css' %}">
+<style>
+@import url(https://fonts.googleapis.com/css?family=Loved+by+the+King);
+
+body {
+    background-color: #fff;
+background-image:
+linear-gradient(90deg, transparent 79px, #abced4 79px, #abced4 81px, transparent 81px),
+linear-gradient(#eee .1em, transparent .1em);
+background-size: 100% 1.2em;
+  margin-left: 100px;
+  padding-left: 30px;
+  padding: 30px 0 30px 30px;
+}
+
+header {
+    display:block;
+    position: absolute;
+    left:30px;
+    top: 60px;
+    -webkit-transform: rotate(-10deg);
+    transform:rotate(-10deg);
+    -webkit-transform-origin: bottom-left;
+    transform-origin:bottom-left;
+    margin: 0 auto;
+}
+
+h1, h2 {
+  margin: 0;
+  padding: 0;
+  color: black;
+  font-family: 'Loved by the King', cursive;
+  text-align: center;
+}
+
+h1 {
+  font-size: 60px;
+  line-height: 35px;
+}
+h2 {
+  font-size: 22px;
+  letter-spacing: -1.3px;
+  text-transform: lowercase;
+}
+
+#subhead {
+    display: block;
+    width:50%;
+    margin:0 auto;
+}
+
+p {
+  font-size: 30px;
+  font-family: 'Loved by the King', cursive;
+  color:#8c8c8c;
+  line-height:38px;
+}
+
+a {
+    color: #333333;
+}
+
+#questionsList {
+    margin: 0 auto;
+    padding:0;
+    width: 50%;
+}
+
+#questionsList section {
+    display:none;
+}
+
+#questionsList section.current {
+    display:block;
+    position: relative;
+}
+
+#questionsList li {
+    display:list-item;
+    margin: 0 auto;
+    list-style: none;
+}
+
+#questionsList li:before {
+    position: absolute;
+    top:-30px;
+    left:-1em;
+    font-family: 'Loved by the King', cursive;
+    font-size:5em;
+    color:#8C8C8C;
+    content: "Q:";
+}
+
+#questionsList .questionItem {
+    margin:0 auto;
+    padding: 1em 0;
+    position: relative;
+    display: block;
+}
+
+#questionsList .questionItem svg {
+    position: absolute;
+    width:40px;
+    height: 40px;
+    top:50%;
+    margin-top: -20px;
+    left:5px;
+    pointer-events:none;
+}
+
+#questionsList .questionItem svg path {
+    stroke: #8C8C8C;
+    stroke-width:13px;
+    background: none;
+}
+
+svg:not(:root) {
+    overflow: hidden;
+}
+
+#questionsList .questionItem label {
+    display: inline-block;
+    position: relative;
+    font-family: 'Loved by the King', cursive;
+    font-size: 2em;
+    color:#8C8C8C;
+    padding:0 0 0 80px;
+    vertical-align: top;
+    cursor: pointer;
+}
+
+#questionsList .questionItem label::before {
+    border-radius: 50%;
+    content: '';
+    border: 4px solid #8C8C8C;
+    width:50px;
+    height:50px;
+    top:50%;
+    left:0;
+    margin-top: -25px;
+    position: absolute;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+#questionsList .questionItem input[type=radio] {
+    -webkit-appearance: none;
+    opacity: 0;
+    width:50px;
+    height:50px;
+    position: absolute;
+    top:50%;
+    left:0;
+    margin-top:-25px;
+    cursor: pointer;
+}
+
+.nextButton, .finalButton {
+    display:block;
+    border:4px solid #8C8C8C;
+    border-radius: 20px;
+    width:100%;
+    margin:0 auto;
+    margin-top: 25px;
+    padding:5px 10px;
+    font-family: 'Loved by the King', cursive;
+    font-size: 2em;
+    text-align: center;
+    text-decoration: none;
+    color: #8C8C8C;
+}
+</style>
+<script>
+  window.console = window.console || function(t) {};
+</script>
+<script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+</head>
+<body translate="no">
+
+<header>
+<h1>python Quiz!</h1>
+</header>
+<ul id="questionsList">
+  <br>
+  <br>
+<section class="current">
+<li>
+<p><strong> &nbsp Which famous film star did Pop artist Andy Warhol make more portraits of than any other? </strong></p>
+<li>
+
+<img src="{% static 'images/python.png' %}"width="500" height="400"></li>
+
+<span class="questionItem">
+<input id="a11" type="radio" name="first" value="beyonce"><label for="a11"><em><strong>Beyonce</strong></em></label>
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"></svg></span>
+<span class="questionItem">
+<input id="a12" type="radio" name="first" value="whitney"><label for="a12"><em><strong>Whitney Houston</strong></em></label>
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"></svg></span>
+<span class="questionItem">
+<input id="a13" type="radio" name="first" value="monroe"><label for="a13"><em><strong>Marilyn Monroe</strong></em></label>
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"></svg></span>
+<span class="questionItem">
+<input id="a14" type="radio" name="first" value="madonna"><label for="a14"><em><strong>Madonna</strong></em></label>
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"></svg></span>
+<a href="#" class="nextButton">Next Question &gt;</a>
+</li>
+</section>
+
+
+{% for q in quizs %}
+
+
+
+<section>
+<li>
+<p> &nbsp {{q.question}} </p>
+<li><img src="{{q.image.url}}"width="600" height="500"></li>
+<span class="questionItem">
+<input id="a{{q.id1}}" type="radio" name="{{q.name}}" value="{{q.option4}}"><label for="a{{q.id1}}"><em><strong>{{q.option4}}</strong></em></label>
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"></svg></span>
+<span class="questionItem">
+<input id="a{{q.id2}}" type="radio" name="{{q.name}}" value="{{q.option1}}"><label for="a{{q.id2}}"><em><strong>{{q.option1}}</strong></em></label>
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"></svg></span>
+<span class="questionItem">
+<input id="a{{q.id3}}" type="radio" name="{{q.name}}" value="{{q.option2}}"><label for="a{{q.id3}}"><em><strong>{{q.option2}}</strong></em></label>
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"></svg></span>
+<span class="questionItem">
+<input id="a{{q.id4}}" type="radio" name="{{q.name}}" value="{{q.option3}}"><label for="a{{q.id4}}"><em><strong>{{q.option3}}</strong></em></label>
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"></svg></span>
+<a href="#" class="nextButton">Next Question &gt;</a>
+</li>
+</section>
+
+
+{% endfor %}
+<br>
+<section>
+<li>
+<p><strong> &nbsp The <em>Mona Lisa</em>, Leonardo da Vinci's magnum opus, draws crowds into which famous European museum?</strong></p>
+<span class="questionItem">
+<input id="b11" type="radio" name="last" value="vatican"><label for="b11"><em><strong>Vatican Museum</strong></em></label>
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"></svg></span>
+<span class="questionItem">
+<input id="b12" type="radio" name="last" value="prado"><label for="b12"><em><strong>Museo del Prado</strong></em></label>
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"></svg></span>
+<span class="questionItem">
+<input id="b13" type="radio" name="last" value="british"><label for="b13"><em><strong>British Museum</strong></em></label>
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"></svg></span>
+<span class="questionItem">
+<input id="b14" type="radio" name="last" value="louvre"><label for="b14"><em><strong>The Musee du Louvre, Paris</strong></em></label>
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"></svg></span>
+<a href="#" id="submitAnswers" class="finalButton">Submit Answers</a>
+
+</li>
+</section>
+
+
+</ul>
+
+<script src="{% static 'js/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js' %}"></script>
+<script id="rendered-js">
+// first we must find all inputs
+var inputs = document.getElementsByTagName("input");
+
+// find all individual questions
+var questions = document.getElementsByTagName("section");
+
+// find questions with class
+var selectedQuestion = document.getElementsByClassName("current");
+
+// find the next button
+var button = document.getElementsByClassName("nextButton");
+for (var i = 0; i < button.length; i++) {if (window.CP.shouldStopExecution(0)) break;
+  button[i].onclick = function () {
+    nextQuestion();
+  };
+}
+
+// question and answers function:
+window.CP.exitedLoop(0);function answersArray() {
+  // and create an empty array to store the answers
+  var answers = [];
+  // and have our correct answers
+  var correctAnswers = ["beyonce",{% for quiz in quizs %}"{{quiz.answers}}",{% endfor %}"prado"];
+  // test the length of the arrays
+  var length = Math.min(answers.length, correctAnswers.length);
+  // have the numbers of correct and incorrect answers
+  var countMatched = 0,countNotMatched = 0;
+  // create a loop to go through the inputs
+  for (i = 0; i < inputs.length; i++) {if (window.CP.shouldStopExecution(1)) break;
+    // only target the selected radio buttons
+    if (inputs[i].checked) {
+      // and push that value into the array of answers
+      answers.push(inputs[i].value);
+    }
+
+  }window.CP.exitedLoop(1);
+  var correctCount = 0;
+  var incorrectCount = 0;
+  for (i = 0; i < answers.length; i++) {if (window.CP.shouldStopExecution(2)) break;
+    if (answers[i] === correctAnswers[i]) {
+      correctCount++;
+    }
+  }window.CP.exitedLoop(2);
+  alert('You got ' + correctCount + ' out of '+  correctAnswers.length +' answers correct!');
+  return answers;
+}
+
+// copied this function as i need a way to test if element has a class
+function hasClass(elem, klass) {
+  return (" " + elem.className + " ").indexOf(" " + klass + " ") > -1;
+}
+
+// move to next question
+var i = 0;
+function nextQuestion() {
+  //for (i=0; i < questions.length; i++) {
+  if (questions[i] === selectedQuestion[0]) {
+    console.log("hi");
+    console.log(i);
+    questions[i].className = "";
+    questions[i + 1].className = "current";
+    i++;
+    return i;
+  }
+  //}
+}
+
+// fire the function on final click
+var submit = document.getElementById("submitAnswers");
+submit.onclick = function () {
+  answersArray();
+};
+
+// RADIO BUTTON UI BELOW
+
+if (document.createElement('svg').getAttributeNS) {
+
+  var radiobxsFill = Array.prototype.slice.call(document.querySelectorAll('#questionsList input[type="radio"]')),
+  pathDefs = {
+    fill: ['M15.833,24.334c2.179-0.443,4.766-3.995,6.545-5.359 c1.76-1.35,4.144-3.732,6.256-4.339c-3.983,3.844-6.504,9.556-10.047,13.827c-2.325,2.802-5.387,6.153-6.068,9.866 c2.081-0.474,4.484-2.502,6.425-3.488c5.708-2.897,11.316-6.804,16.608-10.418c4.812-3.287,11.13-7.53,13.935-12.905 c-0.759,3.059-3.364,6.421-4.943,9.203c-2.728,4.806-6.064,8.417-9.781,12.446c-6.895,7.477-15.107,14.109-20.779,22.608 c3.515-0.784,7.103-2.996,10.263-4.628c6.455-3.335,12.235-8.381,17.684-13.15c5.495-4.81,10.848-9.68,15.866-14.988 c1.905-2.016,4.178-4.42,5.556-6.838c0.051,1.256-0.604,2.542-1.03,3.672c-1.424,3.767-3.011,7.432-4.723,11.076 c-2.772,5.904-6.312,11.342-9.921,16.763c-3.167,4.757-7.082,8.94-10.854,13.205c-2.456,2.777-4.876,5.977-7.627,8.448 c9.341-7.52,18.965-14.629,27.924-22.656c4.995-4.474,9.557-9.075,13.586-14.446c1.443-1.924,2.427-4.939,3.74-6.56 c-0.446,3.322-2.183,6.878-3.312,10.032c-2.261,6.309-5.352,12.53-8.418,18.482c-3.46,6.719-8.134,12.698-11.954,19.203 c-0.725,1.234-1.833,2.451-2.265,3.77c2.347-0.48,4.812-3.199,7.028-4.286c4.144-2.033,7.787-4.938,11.184-8.072 c3.142-2.9,5.344-6.758,7.925-10.141c1.483-1.944,3.306-4.056,4.341-6.283c0.041,1.102-0.507,2.345-0.876,3.388 c-1.456,4.114-3.369,8.184-5.059,12.212c-1.503,3.583-3.421,7.001-5.277,10.411c-0.967,1.775-2.471,3.528-3.287,5.298 c2.49-1.163,5.229-3.906,7.212-5.828c2.094-2.028,5.027-4.716,6.33-7.335c-0.256,1.47-2.07,3.577-3.02,4.809'] },
+
+  animDefs = {
+    fill: { speed: .8, easing: 'ease-in-out' } };
+
+
+  function createSVGEl(def) {
+    var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    if (def) {
+      svg.setAttributeNS(null, 'viewBox', def.viewBox);
+      svg.setAttributeNS(null, 'preserveAspectRatio', def.preserveAspectRatio);
+    } else
+    {
+      svg.setAttributeNS(null, 'viewBox', '0 0 100 100');
+    }
+    svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+    return svg;
+  }
+
+  function controlCheckbox(el, type, svgDef) {
+    var svg = createSVGEl(svgDef);
+    el.parentNode.appendChild(svg);
+
+    el.addEventListener('change', function () {
+      if (el.checked) {
+        draw(el, type);
+      } else
+      {
+        reset(el);
+      }
+    });
+  }
+
+  function controlRadiobox(el, type) {
+    var svg = createSVGEl();
+    el.parentNode.appendChild(svg);
+    el.addEventListener('change', function () {
+      resetRadio(el);
+      draw(el, type);
+    });
+  }
+
+  radiobxsFill.forEach(function (el, i) {controlRadiobox(el, 'fill');});
+
+  function draw(el, type) {
+    var paths = [],pathDef,
+    animDef,
+    svg = el.parentNode.querySelector('svg');
+
+    switch (type) {
+      case 'fill':pathDef = pathDefs.fill;animDef = animDefs.fill;break;}
+    ;
+
+    paths.push(document.createElementNS('http://www.w3.org/2000/svg', 'path'));
+
+    if (type === 'cross' || type === 'list') {
+      paths.push(document.createElementNS('http://www.w3.org/2000/svg', 'path'));
+    }
+
+    for (var i = 0, len = paths.length; i < len; ++i) {if (window.CP.shouldStopExecution(3)) break;
+      var path = paths[i];
+      svg.appendChild(path);
+
+      path.setAttributeNS(null, 'd', pathDef[i]);
+
+      var length = path.getTotalLength();
+      // Clear any previous transition
+      //path.style.transition = path.style.WebkitTransition = path.style.MozTransition = 'none';
+      // Set up the starting positions
+      path.style.strokeDasharray = length + ' ' + length;
+      if (i === 0) {
+        path.style.strokeDashoffset = Math.floor(length) - 1;
+      } else
+      path.style.strokeDashoffset = length;
+      // Trigger a layout so styles are calculated & the browser
+      // picks up the starting position before animating
+      path.getBoundingClientRect();
+      // Define our transition
+      path.style.transition = path.style.WebkitTransition = path.style.MozTransition = 'stroke-dashoffset ' + animDef.speed + 's ' + animDef.easing + ' ' + i * animDef.speed + 's';
+      // Go!
+      path.style.strokeDashoffset = '0';
+    }window.CP.exitedLoop(3);
+  }
+
+  function reset(el) {
+    Array.prototype.slice.call(el.parentNode.querySelectorAll('svg > path')).forEach(function (el) {el.parentNode.removeChild(el);});
+  }
+
+  function resetRadio(el) {
+    Array.prototype.slice.call(document.querySelectorAll('input[type="radio"][name="' + el.getAttribute('name') + '"]')).forEach(function (el) {
+      var path = el.parentNode.querySelector('svg > path');
+      if (path) {
+        path.parentNode.removeChild(path);
+      }
+    });
+  }
+
+}
+//# sourceURL=pen.js
+    </script>
+
+
+</body></html>
